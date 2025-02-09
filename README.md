@@ -25,7 +25,7 @@ The peer-to-peer data exchange ensures that embeddings flow securely between buy
 ### Feasibility
 
 - **Tech-Ready:** GETEM leverages existing technologies, without requring substantial R&D efforts.
-- **Key Challenges:** Streamlining the authentication process and improving developer experience (DX) on Calimero Network for fast iterations.
+- **Key Challenges:** Streamlining the authentication process, improving developer experience on Calimero Network, bringing AI into the nodes
 
 ### Impact & Novelty
 
@@ -66,15 +66,30 @@ We crated also our **Makefile** to automate the setup process, with adapted and 
 ## The current Getem and our vision for the future:
 
 **Phase 1 – Web2 Marketplace:** P2P embedding transactions with **wallet-based payments**.
+
 **Phase 2 – ICP Smart Contract Integration:** Automate embedding transactions using **ICP/Calimero proxy & context contract**.
+
 **Phase 3 – Decentralization of Marketplace:** Move **frontend & marketplace** fully to ICP.
+
 **Phase 4 – AI Agent Integration:** Enable **Federated RAG** with a special AI node, allowing private, context-aware AI execution.
 
 <img width="1336" alt="Screenshot 2025-02-09 at 23 41 09" src="https://github.com/user-attachments/assets/0118787b-0892-4fb2-838a-22fd2602beb8" />
 
+
+
+_________________________________________________________________________________________________________________________________
+
+
+
 <img width="1375" alt="Screenshot 2025-02-09 at 23 41 20" src="https://github.com/user-attachments/assets/0fa977a7-116d-4233-b485-0e3d81873db6" />
 
+
+_________________________________________________________________________________________________________________________________
+
+
+
 <img width="1371" alt="Screenshot 2025-02-09 at 23 41 30" src="https://github.com/user-attachments/assets/29f59373-bf54-4a1d-a8c2-9c734ba4145f" />
+
 
 
 
