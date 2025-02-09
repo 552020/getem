@@ -1,3 +1,5 @@
+<img width="1325" alt="Screenshot 2025-02-09 at 23 16 05" src="https://github.com/user-attachments/assets/32937015-3bc5-447c-a7cb-6c86d19cad64" />
+
 # GETEM
 
 **GETEM is a privacy-focused embedding marketplace, powered by Calimero Network and ICP.**
@@ -77,3 +79,6 @@ GETEM operates on a **transaction-based revenue model**, earning fees through:
 To setup a dev environemnt for Calimero and ICP follow this tutorial: https://calimero-network.github.io/tutorials/awesome-projects/building-with-icp
 
 We crated also our **Makefile** to automate the setup process, with adapted and ad-hoc scripts, but it could not work on your machine! :-) Reach out if you find any difficulties. For easy of use start make in a tmux session.
+
+
+<img width="1344" alt="Screenshot 2025-02-09 at 23 16 30" src="https://github.com/user-attachments/assets/204e346a-c4c0-45f4-a905-084925fd2f00" />
