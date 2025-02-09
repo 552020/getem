@@ -4,7 +4,7 @@
 
 **GETEM is a privacy-focused embedding marketplace, powered by Calimero Network and ICP.**
 
-Check our [video presentation](https://www.loom.com/share/9887ddffd93948b1bcce4a15943af92e?sid=22ad4138-39b3-48bd-81ec-28692819fe82)
+Check our [video presentation](https://www.loom.com/share/9887ddffd93948b1bcce4a15943af92e?sid=22ad4138-39b3-48bd-81ec-28692819fe82)! 
 
 ## Project Overview
 
