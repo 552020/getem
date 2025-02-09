@@ -1,14 +1,13 @@
-import { ApiResponse } from '@calimero-is-near/calimero-p2p-sdk';
+import { ApiResponse } from '@calimero-network/calimero-client';
 
 import {
   ApprovalsCount,
-  ContextDetails,
   ContextVariables,
   ContractApi,
   ContractProposal,
   Members,
 } from '../contractApi';
-import { getStorageAppEndpointKey } from '../../utils/storage';
+import { getNodeUrlFromLocalStorage } from '../../utils/storage';
 import axios from 'axios';
 import { getConfigAndJwt } from './LogicApiDataSource';
 
@@ -27,7 +26,7 @@ export class ContextApiDataSource implements ContractApi {
         return { error };
       }
 
-      const apiEndpoint = `${getStorageAppEndpointKey()}/admin-api/contexts/${jwtObject.context_id}/proposals`;
+      const apiEndpoint = `${getNodeUrlFromLocalStorage()}/admin-api/contexts/${jwtObject.context_id}/proposals`;
       const body = request;
 
       const response = await axios.post(apiEndpoint, body, {
@@ -48,13 +47,13 @@ export class ContextApiDataSource implements ContractApi {
     }
   }
 
-  async getProposalApprovals(proposalId: String): ApiResponse<ApprovalsCount> {
+  async getProposalApprovals(proposalId: string): ApiResponse<ApprovalsCount> {
     try {
       const { jwtObject, error } = getConfigAndJwt();
       if (error) {
         return { error };
       }
-      const apiEndpoint = `${getStorageAppEndpointKey()}/admin-api/contexts/${jwtObject.context_id}/proposals/${proposalId}/approvals/users`;
+      const apiEndpoint = `${getNodeUrlFromLocalStorage()}/admin-api/contexts/${jwtObject.context_id}/proposals/${proposalId}/approvals/users`;
 
       const response = await axios.get(apiEndpoint);
 
@@ -77,10 +76,10 @@ export class ContextApiDataSource implements ContractApi {
         return { error };
       }
 
-      const apiEndpointLimit = `${getStorageAppEndpointKey()}/admin-api/contexts/${jwtObject.context_id}/proposals/count`;
+      const apiEndpointLimit = `${getNodeUrlFromLocalStorage()}/admin-api/contexts/${jwtObject.context_id}/proposals/count`;
       const limitResponse = await axios.get(apiEndpointLimit);
 
-      const apiEndpoint = `${getStorageAppEndpointKey()}/admin-api/contexts/${jwtObject.context_id}/proposals`;
+      const apiEndpoint = `${getNodeUrlFromLocalStorage()}/admin-api/contexts/${jwtObject.context_id}/proposals`;
       const body = {
         offset: 0,
         limit: limitResponse.data.data,
@@ -111,7 +110,7 @@ export class ContextApiDataSource implements ContractApi {
         return { error };
       }
 
-      const apiEndpoint = `${getStorageAppEndpointKey()}/admin-api/contexts/${jwtObject.context_id}/proposals/context-storage-entries`;
+      const apiEndpoint = `${getNodeUrlFromLocalStorage()}/admin-api/contexts/${jwtObject.context_id}/proposals/context-storage-entries`;
       const body = {
         offset: 0,
         limit: 10,
