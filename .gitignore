@@ -1,0 +1,48 @@
+# Environment variables
+.env
+
+# Rust
+target/
+**/*.rs.bk
+Cargo.lock
+
+# Internet Computer
+.dfx/
+canister_ids.json
+
+# Node.js
+node_modules/
+dist/
+build/
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+
+# Ignore all files in the exp directory
+exp/lib_old_ver.rs
+
+target/
+.dfx/
+.vercel
+
+# ignore ONNX models
+*.onnx
+
+# ignore python virtual environment
+.venv/
+/venv/
+**/.venv/
+**/venv/
