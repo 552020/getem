@@ -1,16 +1,16 @@
-import { ApiResponse } from '@calimero-is-near/calimero-p2p-sdk';
+import { ApiResponse } from '@calimero-network/calimero-client';
 
 export interface Message {
-  id: String;
-  proposal_id: String;
-  author: String;
-  text: String;
-  created_at: String;
+  id: string;
+  proposal_id: string;
+  author: string;
+  text: string;
+  created_at: string;
 }
 
 export interface GetProposalMessagesRequest {
   // proposalId: String;
-  proposal_id: String;
+  proposal_id: string;
 }
 
 export interface GetProposalMessagesResponse {
@@ -19,7 +19,7 @@ export interface GetProposalMessagesResponse {
 
 export interface SendProposalMessageRequest {
   // proposalId: String;
-  proposal_id: String;
+  proposal_id: string;
   message: Message;
 }
 
@@ -73,7 +73,7 @@ export interface CreateProposalRequest {
 }
 
 export interface CreateProposalResponse {
-  proposal_id: String;
+  proposal_id: string;
 }
 
 export interface ApproveProposalRequest {

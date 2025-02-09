@@ -1,10 +1,11 @@
-import { ApiResponse } from '@calimero-is-near/calimero-p2p-sdk';
-import { GetProposalsRequest } from './dataSource/ContractApiDataSource';
+import { ApiResponse } from '@calimero-network/calimero-client';
 
-export interface ContextDetails {}
+export interface ContextDetails {
+  id: string;
+}
 
 export interface Members {
-  publicKey: String;
+  publicKey: string;
 }
 
 export interface ProposalAction {
@@ -21,17 +22,12 @@ export interface ContractProposal {
   actions: ProposalAction[];
 }
 
-//
-export interface CalimeroProposalMetadata {}
-
-export interface ContextDetails {}
-
-export interface Members {
-  publicKey: String;
+export interface CalimeroProposalMetadata {
+  timestamp: number;
 }
 
 export interface Message {
-  publicKey: String;
+  publicKey: string;
 }
 
 export interface ApprovalsCount {
@@ -46,15 +42,17 @@ export interface ContextVariables {
 
 export interface ContractApi {
   //Contract
-  getContractProposals(
-    request: GetProposalsRequest,
-  ): ApiResponse<ContractProposal[]>;
+  getContractProposals(request: {
+    offset: number;
+    limit: number;
+  }): ApiResponse<ContractProposal[]>;
   getNumOfProposals(): ApiResponse<number>;
-  getProposalApprovals(proposalId: String): ApiResponse<ApprovalsCount>;
-  getContextDetails(contextId: String): ApiResponse<ContextDetails>;
+  getProposalApprovals(proposalId: string): ApiResponse<ApprovalsCount>;
+  getContextDetails(contextId: string): ApiResponse<ContextDetails>;
   getContextMembers(): ApiResponse<Members[]>;
   getContextMembersCount(): ApiResponse<number>;
   deleteProposal(proposalId: string): ApiResponse<void>;
+  getContextVariables(): ApiResponse<ContextVariables[]>;
 }
 
 // async removeProposal(proposalId: String): ApiResponse<boolean> {

@@ -6,7 +6,7 @@ import {
   RpcError,
   handleRpcError,
   RpcQueryParams,
-} from '@calimero-is-near/calimero-p2p-sdk';
+} from '@calimero-network/calimero-client';
 import {
   ApproveProposalRequest,
   ApproveProposalResponse,
@@ -22,18 +22,24 @@ import {
 import { getContextId, getNodeUrl } from '../../utils/node';
 import {
   getJWTObject,
-  getStorageAppEndpointKey,
+  getApplicationIdFromLocalStorage,
   JsonWebToken,
 } from '../../utils/storage';
 import { AxiosHeader, createJwtHeader } from '../../utils/jwtHeaders';
 import { getRpcPath } from '../../utils/env';
 
 export function getJsonRpcClient() {
-  return new JsonRpcClient(getStorageAppEndpointKey() ?? '', getRpcPath());
+  return new JsonRpcClient(
+    getApplicationIdFromLocalStorage() ?? '',
+    getRpcPath(),
+  );
 }
 
 export function getWsSubscriptionsClient() {
-  return new WsSubscriptionsClient(getStorageAppEndpointKey() ?? '', '/ws');
+  return new WsSubscriptionsClient(
+    getApplicationIdFromLocalStorage() ?? '',
+    '/ws',
+  );
 }
 
 export function getConfigAndJwt() {
