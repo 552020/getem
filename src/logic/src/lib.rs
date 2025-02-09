@@ -9,14 +9,13 @@ use calimero_sdk::{
 use calimero_storage::collections::{UnorderedMap, Vector};
 use calimero_context_config::icp::types::ICSigned;
 use calimero_context_config::icp::ICProxyMutateRequest;
-use ed25519_dalek::{SigningKey, VerifyingKey};
+use ed25519_dalek::{SigningKey, Signer};
 use calimero_context_config::icp::{
     ICProposal, 
     ICProposalAction, 
     ICProposalApprovalWithSigner,
     ProposalAction,
 };
-use rand::Rng;
 
 // ---------------- FileExchange Types ----------------
 
