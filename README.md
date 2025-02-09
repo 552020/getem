@@ -10,7 +10,8 @@ Check our [video presentation](https://www.loom.com/share/9887ddffd93948b1bcce4a
 
 ### Problem Statement
 
-Increasing need for specialized and rare datasets that LLMs are not trained on to leverage specialized AI agents, while ensuring secure, decentralized data sharing to protect sensitive information.
+⬜ The problem we address is the increasing need for specialized datasets to enhance the capabilities of AI agents, while also ensuring secure, decentralized data sharing to protect sensitive information.
+
 
 ### Target Audience
 
@@ -48,8 +49,8 @@ GETEM operates on a **transaction-based revenue model**, earning fees through:
 
 ### Team - SLD Unit
 
-- [Léonard](https://github.com/lmangall)
 - [Stefano](https://github.com/552020)
+- [Léonard](https://github.com/lmangall)
 - [Daniil](https://github.com/dantol29/)
 
 ## Pitch Deck
@@ -60,9 +61,9 @@ GETEM operates on a **transaction-based revenue model**, earning fees through:
 
 - **Prerequisites**
 
-To setup a dev environemnt for Calimero and ICP follow this tutorial: https://calimero-network.github.io/tutorials/awesome-projects/building-with-icp
+Use our **Makefile** to automate the setup process, with adapted and ad-hoc scripts, but it could not work on your machine! :-) For easy of use start make in a tmux session.
+You can also use the official docs to setup a dev environemnt for Calimero and ICP following this tutorial: https://calimero-network.github.io/tutorials/awesome-projects/building-with-icp
 
-We crated also our **Makefile** to automate the setup process, with adapted and ad-hoc scripts, but it could not work on your machine! :-) Reach out if you find any difficulties. For easy of use start make in a tmux session.
 
 ## The current Getem and our vision for the future:
 
