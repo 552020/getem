@@ -50,7 +50,7 @@ GETEM operates on a **transaction-based revenue model**, earning fees through:
 
 - [Léonard](https://github.com/lmangall)
 - [Stefano](https://github.com/552020)
-- [Daniil]((https://github.com/dantol29/))
+- [Daniil](https://github.com/dantol29/))
 
 ## Pitch Deck
 
