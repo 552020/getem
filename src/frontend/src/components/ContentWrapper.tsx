@@ -1,9 +1,10 @@
-import { Footer } from "@/components/Footer";
-import CalimeroLogo from "@/assets/calimero-logo.svg";
-import ICPLogo from "@/assets/icp-logo.svg";
+import { Footer } from '@/components/Footer';
+import CalimeroLogo from '@/assets/calimero-logo.svg';
+import ICPLogo from '@/assets/icp-logo.svg';
 interface ContentWrapperProps {
   children: React.ReactNode;
 }
+import { Button } from '@/components/ui/button';
 
 export const ContentWrapper = ({ children }: ContentWrapperProps) => {
   return (
@@ -18,6 +19,7 @@ export const ContentWrapper = ({ children }: ContentWrapperProps) => {
           />
           <img src={ICPLogo} alt="ICP Logo" className="h-[43.3px] w-[160px]" />
         </div>
+        <Button variant="outline">Button</Button>
       </nav>
 
       {/* Main Content */}

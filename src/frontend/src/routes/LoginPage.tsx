@@ -1,18 +1,18 @@
-import { ClientLogin } from "@calimero-network/calimero-client";
-import { useNavigate } from "react-router-dom";
-import { getApplicationId, getNodeUrl } from "@/utils/node";
+import { ClientLogin } from '@calimero-network/calimero-client';
+import { useNavigate } from 'react-router-dom';
+import { getApplicationId, getNodeUrl } from '@/utils/node';
 import {
   clearApplicationIdFromLocalStorage,
   clearNodeUrlFromLocalStorage,
-} from "@/utils/storage";
-import ContentWrapper from "@/components/ContentWrapper";
+} from '@/utils/storage';
+import ContentWrapper from '@/components/ContentWrapper';
 
 export default function LoginPage() {
   const navigate = useNavigate();
   function onSetupClick() {
     clearNodeUrlFromLocalStorage();
     clearApplicationIdFromLocalStorage();
-    navigate("/");
+    navigate('/');
   }
   return (
     <ContentWrapper>
@@ -21,14 +21,14 @@ export default function LoginPage() {
           <div className="rounded-lg bg-gray-800 p-8">
             <div className="flex items-center justify-center gap-3 px-14">
               <div className="text-2xl font-bold text-pink-500 bg-white border-3 border-pink-500 rounded-lg p-2">
-                {`${" B I L L O "}`}
+                {`${' B I L L O '}`}
               </div>
             </div>
             <div className="bg-gray-800">
               <ClientLogin
                 getNodeUrl={getNodeUrl}
                 getApplicationId={getApplicationId}
-                sucessRedirect={() => navigate("/home")}
+                sucessRedirect={() => navigate('/home')}
               />
             </div>
           </div>
