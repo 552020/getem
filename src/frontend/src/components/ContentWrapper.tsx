@@ -10,7 +10,7 @@ export const ContentWrapper = ({ children }: ContentWrapperProps) => {
   return (
     <div className="min-h-screen w-full bg-pink-500">
       {/* Navigation Bar */}
-      <nav className="flex justify-between px-2 py-4 bg-green-500">
+      <nav className="flex justify-between px-2 py-4 bg-stone-400">
         <div className="relative flex items-center gap-2">
           <img
             src={CalimeroLogo}
