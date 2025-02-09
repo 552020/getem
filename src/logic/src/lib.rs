@@ -7,7 +7,6 @@ use calimero_sdk::{
     types::Error,
 };
 use calimero_storage::collections::{UnorderedMap, Vector};
-use std::collections::HashMap;
 
 // ---------------- FileExchange Types ----------------
 
@@ -156,10 +155,10 @@ impl FileExchangeState {
     }
 
     pub fn list_files(&self) -> Result<Vec<String>, FileExchangeError> {
-        Ok(self.files
-            .keys()
-            .map_err(|e| FileExchangeError::StorageError(e.to_string()))?
-            .collect())
+        self.files
+            .entries()
+            .map_err(|e| FileExchangeError::StorageError(e.to_string()))
+            .map(|entries| entries.map(|(key, _)| key).collect())
     }
 
     // ===== Proposal Functions =====
@@ -291,7 +290,10 @@ impl FileExchangeState {
         let Some(msgs) = self.proposal_messages.get(&proposal_id)? else {
             return Ok(vec![]);
         };
-        Ok(msgs.entries()?.collect())
+        
+        // Create a new vector and collect the entries
+        let entries: Vec<Message> = msgs.entries()?.collect();
+        Ok(entries)
     }
 
     pub fn send_proposal_messages(
