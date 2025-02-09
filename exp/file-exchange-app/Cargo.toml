@@ -1,0 +1,15 @@
+[package]
+name = "file-exchange-app"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+bs58 = "0.5.0"
+calimero-sdk = { git = "https://github.com/calimero-network/core", branch = "master" }
+calimero-storage = { git = "https://github.com/calimero-network/core", branch = "master" }
+ed25519-dalek = { version = "2.1.1", features = ["rand_core"] }
+rand = "0.8"
+borsh = "1.5"
