@@ -1,8 +1,5 @@
-Here’s a list of the available external methods (callable through `meroctl`) along with an example for each:  
+### **Available Methods for the file exchange app**
 
----
-
-### **Available Methods**
 1. **`upload_file(name: String, content: String, owner: String) -> bool`**  
    Uploads a file with a given name and content, assigning ownership.
 
@@ -19,7 +16,8 @@ Here’s a list of the available external methods (callable through `meroctl`) a
 
 ### **Example `meroctl` Commands**
 
-#### 1️⃣ Upload a file  
+#### 1️⃣ Upload a file
+
 ```sh
 meroctl --node-name node1 call --as <EXECUTOR_ID> <CONTEXT_ID> upload_file --args '{
     "name": "example.txt",
@@ -28,7 +26,8 @@ meroctl --node-name node1 call --as <EXECUTOR_ID> <CONTEXT_ID> upload_file --arg
 }'
 ```
 
-#### 2️⃣ Download a file  
+#### 2️⃣ Download a file
+
 ```sh
 meroctl --node-name node1 call --as <EXECUTOR_ID> <CONTEXT_ID> download_file --args '{
     "name": "example.txt",
@@ -36,7 +35,8 @@ meroctl --node-name node1 call --as <EXECUTOR_ID> <CONTEXT_ID> download_file --a
 }'
 ```
 
-#### 3️⃣ Delete a file  
+#### 3️⃣ Delete a file
+
 ```sh
 meroctl --node-name node1 call --as <EXECUTOR_ID> <CONTEXT_ID> delete_file --args '{
     "name": "example.txt",
@@ -44,7 +44,8 @@ meroctl --node-name node1 call --as <EXECUTOR_ID> <CONTEXT_ID> delete_file --arg
 }'
 ```
 
-#### 4️⃣ List all files  
+#### 4️⃣ List all files
+
 ```sh
 meroctl --node-name node1 call --as <EXECUTOR_ID> <CONTEXT_ID> list_files --args '{}'
 ```
