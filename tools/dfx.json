@@ -1,0 +1,34 @@
+{
+  "canisters": {
+    "context_contract": {
+      "type": "custom",
+      "candid": "./context-config/calimero_context_config_icp.did",
+      "wasm": "./context-config/calimero_context_config_icp.wasm"
+    },
+    "ledger": {
+      "type": "custom",
+      "wasm": "https://download.dfinity.systems/ic/aba60ffbc46acfc8990bf4d5685c1360bd7026b9/canisters/ledger-canister.wasm.gz",
+      "candid": "https://raw.githubusercontent.com/dfinity/ic/aba60ffbc46acfc8990bf4d5685c1360bd7026b9/rs/ledger_suite/icp/ledger.did"
+    },
+    "external": {
+      "type": "custom",
+      "package": "external",
+      "candid": "./context-proxy/external_getem/external.did",
+      "wasm": "./context-proxy/external_getem/res/external.wasm"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "persistent"
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
