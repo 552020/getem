@@ -1,21 +1,12 @@
 use calimero_sdk::{
     app,
     borsh::{BorshDeserialize, BorshSerialize},
-    serde::{Serialize, Deserialize},
     env,
     env::ext::{AccountId, ProposalId},
+    serde::{Deserialize, Serialize},
     types::Error,
 };
 use calimero_storage::collections::{UnorderedMap, Vector};
-use calimero_context_config::icp::types::ICSigned;
-use calimero_context_config::icp::ICProxyMutateRequest;
-use ed25519_dalek::{SigningKey, Signer};
-use calimero_context_config::icp::{
-    ICProposal, 
-    ICProposalAction, 
-    ICProposalApprovalWithSigner,
-    ProposalAction,
-};
 
 // ---------------- FileExchange Types ----------------
 
@@ -175,11 +166,11 @@ impl FileExchangeState {
     pub fn create_new_proposal(
         &mut self,
         request: CreateProposalRequest,
-        signer: &SigningKey
     ) -> Result<ProposalId, Error> {
         env::log("Starting create_new_proposal");
-        
-        let proposal = match request.action_type.as_str() {
+        env::log(&format!("Request type: {}", request.action_type));
+
+        let proposal_id = match request.action_type.as_str() {
             "ExternalFunctionCall" => {
                 env::log("Processing ExternalFunctionCall");
                 let receiver_id = request.params["receiver_id"]
@@ -209,6 +200,7 @@ impl FileExchangeState {
                         args.to_string(),
                         deposit,
                     )
+                    .send()
             }
             "Transfer" => {
                 env::log("Processing Transfer");
@@ -223,6 +215,7 @@ impl FileExchangeState {
                 Self::external()
                     .propose()
                     .transfer(AccountId(receiver_id.to_string()), amount)
+                    .send()
             }
             "SetContextValue" => {
                 env::log("Processing SetContextValue");
@@ -242,6 +235,7 @@ impl FileExchangeState {
                 Self::external()
                     .propose()
                     .set_context_value(key, value)
+                    .send()
             }
             "SetNumApprovals" => Self::external()
                 .propose()
@@ -249,7 +243,8 @@ impl FileExchangeState {
                     request.params["num_approvals"]
                         .as_u64()
                         .ok_or(Error::msg("num_approvals is required"))? as u32,
-                ),
+                )
+                .send(),
             "SetActiveProposalsLimit" => Self::external()
                 .propose()
                 .set_active_proposals_limit(
@@ -257,81 +252,23 @@ impl FileExchangeState {
                         .as_u64()
                         .ok_or(Error::msg("active_proposals_limit is required"))?
                         as u32,
-                ),
-            "DeleteProposal" => Self::external()
-                .propose()
-                .delete(ProposalId(
-                    hex::decode(
-                        request.params["proposal_id"]
-                            .as_str()
-                            .ok_or_else(|| Error::msg("proposal_id is required"))?,
-                    )?
-                    .try_into()
-                    .map_err(|_| Error::msg("Invalid proposal ID length"))?,
-                )),
+                )
+                .send(),
             _ => return Err(Error::msg("Invalid action type")),
         };
 
-        // Use the helper method to sign and send
-        let proposal_id = self.sign_and_send_proposal(proposal, signer)?;
-        
-        // Store proposal messages
-        self.proposal_messages.insert(proposal_id, Vector::new())?;
-        
+        // Initialize proposal messages storage
+        let old = self.proposal_messages.insert(proposal_id, Vector::new())?;
+        if old.is_some() {
+            return Err(Error::msg("proposal already exists"));
+        }
+
         app::emit!(Event::ProposalCreated { id: proposal_id });
         Ok(proposal_id)
     }
 
-    pub fn sign_and_send_proposal(
-        &self,
-        proposal: ProposalAction,
-        signer: &SigningKey
-    ) -> Result<ProposalId, Error> {
-        // Create the ICProposal structure
-        let ic_proposal = ICProposal {
-            id: self.generate_proposal_id()?,
-            author_id: signer.verifying_key().to_bytes().into(),
-            actions: vec![proposal.into()],
-        };
-
-        let request = ICProxyMutateRequest::Propose { 
-            proposal: ic_proposal 
-        };
-
-        let signed_request = ICSigned::new(request, |bytes| Ok(signer.sign(bytes)))?;
-
-        // Send the signed request and handle the response
-        match Self::external().send_signed_proposal(signed_request)? {
-            Some(proposal_with_approvals) => Ok(proposal_with_approvals.proposal_id),
-            None => Err(Error::msg("Failed to create proposal"))
-        }
-    }
-
-    // Helper function to generate a proposal ID using env::random_seed
-    fn generate_proposal_id(&self) -> Result<ProposalId, Error> {
-        let random_bytes = env::random_seed();
-        if random_bytes.len() < 32 {
-            return Err(Error::msg("Insufficient random bytes"));
-        }
-        let mut bytes = [0u8; 32];
-        bytes.copy_from_slice(&random_bytes[..32]);
-        Ok(ProposalId(bytes))
-    }
-
-    pub fn approve_proposal(
-        &self,
-        proposal_id: ProposalId,
-        signer: &SigningKey
-    ) -> Result<(), Error> {
-        let approval = ICProposalApprovalWithSigner {
-            proposal_id,
-            signer_id: signer.verifying_key().to_bytes().into(),
-        };
-
-        let request = ICProxyMutateRequest::Approve { approval };
-        let signed_request = ICSigned::new(request, |bytes| Ok(signer.sign(bytes)))?;
-
-        Self::external().send_signed_proposal(signed_request)?;
+    pub fn approve_proposal(&self, proposal_id: ProposalId) -> Result<(), Error> {
+        Self::external().approve(proposal_id);
         app::emit!(Event::ApprovedProposal { id: proposal_id });
         Ok(())
     }
