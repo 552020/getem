@@ -5,8 +5,8 @@ DFX_VERSION=0.24.3
 CARGO_VERSION=1.81.0
 CANDID_EXTRACTOR_VERSION=0.1.5
 PNPM_VERSION=9.6.0
-CALIMERO_APP_WASM_PATH=./src/backend/res/hello_app.wasm
-CALIMERO_APP_BUILD_PATH=./src/backend/
+# CALIMERO_APP_WASM_PATH=./src/backend/res/hello_app.wasm
+CALIMERO_APP_BUILD_PATH=./src/logic/
 
 # Control flags for each package
 # Set DISABLE to 1 to skip the check
