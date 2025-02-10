@@ -193,7 +193,7 @@ export class LogicApiDataSource implements ClientApi {
       );
     }
 
-    let getProposalsResponse: GetProposalMessagesResponse = {
+    const getProposalsResponse: GetProposalMessagesResponse = {
       messages: response?.result?.output?.messages,
     } as GetProposalMessagesResponse;
 
@@ -246,6 +246,8 @@ export class LogicApiDataSource implements ClientApi {
     };
   }
 
+  // TODO: Properly type these parameters when the API contract is finalized
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   private async handleError(
     error: RpcError,
     params: any,
@@ -261,4 +263,5 @@ export class LogicApiDataSource implements ClientApi {
       };
     }
   }
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 }
