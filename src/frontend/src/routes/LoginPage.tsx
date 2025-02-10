@@ -10,7 +10,6 @@ import GetemLogo from '@/assets/getem_white.svg';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
