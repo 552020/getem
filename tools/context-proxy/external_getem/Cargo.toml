@@ -1,5 +1,5 @@
 [package]
-name = "external"
+name = "external_getem"
 version = "0.1.0"
 edition = "2021"
 

@@ -13,4 +13,4 @@ cargo build --target wasm32-unknown-unknown
 
 mkdir -p res
 
-cp $TARGET/wasm32-unknown-unknown/debug/external.wasm ./res/
+cp $TARGET/wasm32-unknown-unknown/debug/external_getem.wasm ./res/

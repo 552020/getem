@@ -13,8 +13,8 @@
     "external": {
       "type": "custom",
       "package": "external",
-      "candid": "./context-proxy/external/external.did",
-      "wasm": "./context-proxy/external/res/external.wasm"
+      "candid": "./context-proxy/external_getem/external.did",
+      "wasm": "./context-proxy/external_getem/res/external.wasm"
     }
   },
   "defaults": {
