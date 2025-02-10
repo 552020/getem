@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, ProposalData } from './CreateProposalPopup';
+import { ProposalData } from './CreateProposalPopup';
 
 interface TransferFormProps {
   proposalForm: ProposalData;
@@ -14,30 +14,34 @@ export default function TransferForm({
 }: TransferFormProps) {
   return (
     <>
-      <FormGroup>
-        <label htmlFor="receiverId">Receiver ID</label>
+      <div className="mb-4">
+        <label htmlFor="receiverId" className="block mb-2">
+          Receiver ID
+        </label>
         <input
           type="text"
           id="receiverId"
           name="receiverId"
-          placeholder="account address"
           value={proposalForm.receiverId}
           onChange={handleInputChange}
           required
+          className="w-full p-2 rounded bg-[#333] border border-[#444] text-white"
         />
-      </FormGroup>
-      <FormGroup>
-        <label htmlFor="amount">Amount</label>
+      </div>
+      <div className="mb-4">
+        <label htmlFor="amount" className="block mb-2">
+          Amount
+        </label>
         <input
           type="text"
           id="amount"
           name="amount"
-          placeholder="10"
           value={proposalForm.amount}
           onChange={handleInputChange}
           required
+          className="w-full p-2 rounded bg-[#333] border border-[#444] text-white"
         />
-      </FormGroup>
+      </div>
     </>
   );
 }

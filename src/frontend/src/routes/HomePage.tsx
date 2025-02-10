@@ -7,7 +7,7 @@ import {
   ResponseData,
 } from '@calimero-network/calimero-client';
 import { useEffect, useState, useRef } from 'react';
-import { LogicApiDataSource } from '../../api/dataSource/LogicApiDataSource';
+import { LogicApiDataSource } from '../api/dataSource/LogicApiDataSource';
 import {
   ApproveProposalRequest,
   ApproveProposalResponse,
@@ -18,165 +18,30 @@ import {
   SendProposalMessageRequest,
   SendProposalMessageResponse,
   ProposalActionType,
-  ExternalFunctionCallAction,
-  TransferAction,
-} from '../../api/clientApi';
-import { getContextId, getStorageApplicationId } from '../../utils/node';
+} from '../api/clientApi';
+import { getApplicationId } from '../utils/node';
 import {
-  clearApplicationId,
+  clearApplicationIdFromLocalStorage,
   getJWTObject,
-  getStorageExecutorPublicKey,
-} from '../../utils/storage';
+} from '../utils/storage';
 import { useNavigate } from 'react-router-dom';
-import { ContextApiDataSource } from '../../api/dataSource/ContractApiDataSource';
+import { ContextApiDataSource } from '../api/dataSource/ContractApiDataSource';
 import {
   ApprovalsCount,
   ContextVariables,
   ContractProposal,
-} from '../../api/contractApi';
+} from '../api/contractApi';
 import { Buffer } from 'buffer';
 import bs58 from 'bs58';
 import CreateProposalPopup, {
   ProposalData,
-} from '../../components/proposals/CreateProposalPopup';
-import Actions from '../../components/proposal/Actions';
-
-// const FullPageCenter = styled.div`
-//   display: flex;
-//   height: 100vh;
-//   width: 100vw;
-//   background-color: #111111;
-//   justify-content: center;
-//   align-items: center;
-//   flex-direction: column;
-// `;
-
-// const TextStyle = styled.div`
-//   color: white;
-//   margin-bottom: 2em;
-//   font-size: 2em;
-// `;
-
-// const Button = styled.button`
-//   color: white;
-//   padding: 0.25em 1em;
-//   margin: 0.25em;
-//   border-radius: 8px;
-//   font-size: 2em;
-//   background: #5dbb63;
-//   cursor: pointer;
-//   justify-content: center;
-//   display: flex;
-//   border: none;
-//   outline: none;
-// `;
-
-// const ButtonSm = styled.button`
-//   color: white;
-//   padding: 0.25em 1em;
-//   margin: 0.25em;
-//   border-radius: 8px;
-//   font-size: 1rem;
-//   background: #5dbb63;
-//   cursor: pointer;
-//   justify-content: center;
-//   display: flex;
-//   border: none;
-//   outline: none;
-// `;
-
-// const LogoutButton = styled.div`
-//   color: black;
-//   margin-top: 2rem;
-//   padding: 0.25em 1em;
-//   border-radius: 8px;
-//   font-size: 1em;
-//   background: white;
-//   cursor: pointer;
-//   justify-content: center;
-//   display: flex;
-// `;
-
-// const ProposalsWrapper = styled.div`
-//   .select-dropdown {
-//     text-align: center;
-//     color: white;
-//     padding: 0.25em 1em;
-//     margin: 0.25em;
-//     border-radius: 8px;
-//     font-size: 1rem;
-//     background: #5dbb63;
-//     cursor: pointer;
-//     justify-content: center;
-//     display: flex;
-//     border: none;
-//     outline: none;
-//   }
-
-//   .proposal-data {
-//     font-size: 0.75rem;
-//     padding-left: 1rem;
-//     padding-right: 1rem;
-//   }
-
-//   .actions-headers {
-//     display: flex;
-//     justify-content: space-between;
-//     padding-left: 0.5rem;
-//     padding-right: 0.5rem;
-//   }
-
-//   .flex-container {
-//     display: flex;
-//     gap: 0.5rem;
-//     align-items: center;
-//   }
-
-//   .center {
-//     justify-content: center;
-//     margin-top: 0.5rem;
-//   }
-
-//   .title {
-//     padding: 0;
-//     margin: 0;
-//   }
-
-//   .actions-title {
-//     padding-top: 0.5rem;
-//   }
-
-//   .highlight {
-//     background: #ffa500;
-//   }
-// `;
-
-// const StyledTable = styled.table`
-//   th,
-//   td {
-//     text-align: center;
-//     padding: 8px;
-//     max-width: 200px;
-//     overflow-wrap: break-word;
-//   }
-// `;
-
-// const ContextVariablesContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-
-//   .context-variables {
-//     padding-left: 1rem;
-//     padding-right: 1rem;
-//     text-align: center;
-//   }
-// `;
+} from '../components/proposals/CreateProposalPopup';
+import Actions from '../components/Actions';
 
 export default function HomePage() {
   const navigate = useNavigate();
   const url = getAppEndpointKey();
-  const applicationId = getStorageApplicationId();
+  const applicationId = getApplicationId();
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
   const [createProposalLoading, setCreateProposalLoading] = useState(false);
@@ -187,7 +52,6 @@ export default function HomePage() {
   >(null);
   const [proposalCount, setProposalCount] = useState<number>(0);
   const [approveProposalLoading, setApproveProposalLoading] = useState(false);
-  const [hasAlerted, setHasAlerted] = useState<boolean>(false);
   const lastExecutedProposalRef = useRef<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [contextVariables, setContextVariables] = useState<ContextVariables[]>(
@@ -199,9 +63,9 @@ export default function HomePage() {
     }
   }, [accessToken, applicationId, navigate, refreshToken, url]);
 
-  async function fetchProposalMessages(proposalId: String) {
+  async function fetchProposalMessages(proposalId: string) {
     const params: GetProposalMessagesRequest = {
-      proposal_id: proposalId,
+      proposal_id: proposalId.toString(),
     };
     const result: ResponseData<GetProposalMessagesResponse> =
       await new LogicApiDataSource().getProposalMessages(params);
@@ -460,17 +324,17 @@ export default function HomePage() {
     window.alert(`Proposal approved successfully`);
   }
 
-  async function getContextDetails() {
-    //TODO implement this function
-  }
+  //   async function getContextDetails() {
+  //     //TODO implement this function
+  //   }
 
-  async function getContextMembers() {
-    //TODO implement this function
-  }
+  //   async function getContextMembers() {
+  //     //TODO implement this function
+  //   }
 
-  async function getContextMembersCount() {
-    //TODO implement this function
-  }
+  //   async function getContextMembersCount() {
+  //     //TODO implement this function
+  //   }
 
   // const observeNodeEvents = async () => {
   //   let subscriptionsClient: SubscriptionsClient = getWsSubscriptionsClient();
@@ -528,7 +392,7 @@ export default function HomePage() {
   const logout = () => {
     clearAppEndpoint();
     clearJWT();
-    clearApplicationId();
+    clearApplicationIdFromLocalStorage();
     navigate('/auth');
   };
 
@@ -710,7 +574,6 @@ export default function HomePage() {
     </div>
   );
 }
-
 //   return (
 //     <FullPageCenter>
 //       <TextStyle>

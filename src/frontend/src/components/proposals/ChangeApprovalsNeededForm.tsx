@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, ProposalData } from './CreateProposalPopup';
+import { ProposalData } from './CreateProposalPopup';
 
 interface ChangeApprovalsNeededFormProps {
   proposalForm: ProposalData;
@@ -13,8 +13,10 @@ export default function ChangeApprovalsNeededForm({
   handleInputChange,
 }: ChangeApprovalsNeededFormProps) {
   return (
-    <FormGroup>
-      <label htmlFor="minApprovals">Minimum Approvals Required</label>
+    <div className="mb-4">
+      <label htmlFor="minApprovals" className="block mb-2">
+        Minimum Approvals Required
+      </label>
       <input
         type="number"
         id="minApprovals"
@@ -24,7 +26,8 @@ export default function ChangeApprovalsNeededForm({
         onChange={handleInputChange}
         min="1"
         required
+        className="w-full p-2 rounded bg-[#333] border border-[#444] text-white"
       />
-    </FormGroup>
+    </div>
   );
 }

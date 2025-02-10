@@ -18,7 +18,7 @@ import {
   GetProposalMessagesResponse,
   SendProposalMessageRequest,
   SendProposalMessageResponse,
-} from '../clientApi';
+} from '../../api/clientApi';
 import { getContextId, getNodeUrl } from '../../utils/node';
 import {
   getJWTObject,
@@ -26,6 +26,7 @@ import {
   JsonWebToken,
 } from '../../utils/storage';
 import { AxiosHeader, createJwtHeader } from '../../utils/jwtHeaders';
+
 import { getRpcPath } from '../../utils/env';
 
 export function getJsonRpcClient() {
@@ -83,9 +84,7 @@ export class LogicApiDataSource implements ClientApi {
     const params: RpcQueryParams<typeof request> = {
       contextId: jwtObject?.context_id ?? getContextId(),
       method: ClientMethod.CREATE_PROPOSAL,
-      argsJson: {
-        request: request,
-      },
+      argsJson: request,
       executorPublicKey: jwtObject.executor_public_key,
     };
 
@@ -119,7 +118,10 @@ export class LogicApiDataSource implements ClientApi {
     } catch (err) {
       console.error('Unexpected error:', err);
       return {
-        error: { message: err.message || 'Unexpected error', code: 500 },
+        error: {
+          message: err instanceof Error ? err.message : 'Unexpected error',
+          code: 500,
+        },
         data: null,
       };
     }
@@ -230,6 +232,16 @@ export class LogicApiDataSource implements ClientApi {
 
     return {
       data: {},
+      error: null,
+    };
+  }
+
+  async deleteProposal(proposalId: string): ApiResponse<void> {
+    // TODO: Backend API endpoint not implemented yet
+    console.log('deleteProposal', proposalId);
+    console.warn('deleteProposal: Backend API endpoint not implemented yet');
+    return {
+      data: undefined,
       error: null,
     };
   }

@@ -1,11 +1,4 @@
-import React from 'react';
-import { ButtonSm, FormGroup, ProposalData } from './CreateProposalPopup';
-import { styled } from 'styled-components';
-
-const ScrollWrapper = styled.div`
-  max-height: 150px;
-  overflow-y: auto;
-`;
+import { ProposalData } from './CreateProposalPopup';
 
 interface SetContextVariableFormProps {
   proposalForm: ProposalData;
@@ -26,18 +19,11 @@ export default function SetContextVariableForm({
 }: SetContextVariableFormProps) {
   return (
     <>
-      <ScrollWrapper>
+      <div className="max-h-[150px] overflow-y-auto">
         {proposalForm.contextVariables.map(
           (variable: { key: string; value: string }, index: number) => (
-            <div
-              key={index}
-              style={{
-                display: 'flex',
-                gap: '1rem',
-                alignItems: 'flex-end',
-              }}
-            >
-              <FormGroup>
+            <div key={index} className="flex gap-4 items-end mb-4">
+              <div className="flex-1">
                 <input
                   type="text"
                   placeholder="key"
@@ -46,9 +32,10 @@ export default function SetContextVariableForm({
                     handleContextVariableChange(index, 'key', e.target.value)
                   }
                   required
+                  className="w-full p-2 rounded bg-[#333] border border-[#444] text-white"
                 />
-              </FormGroup>
-              <FormGroup>
+              </div>
+              <div className="flex-1">
                 <input
                   type="text"
                   placeholder="value"
@@ -57,12 +44,27 @@ export default function SetContextVariableForm({
                     handleContextVariableChange(index, 'value', e.target.value)
                   }
                   required
+                  className="w-full p-2 rounded bg-[#333] border border-[#444] text-white"
                 />
-              </FormGroup>
+              </div>
+              <button
+                type="button"
+                onClick={() => removeContextVariable(index)}
+                className="px-4 py-1 rounded-lg bg-[#666] text-white cursor-pointer"
+              >
+                Remove
+              </button>
             </div>
           ),
         )}
-      </ScrollWrapper>
+      </div>
+      <button
+        type="button"
+        onClick={addContextVariable}
+        className="px-4 py-1 rounded-lg bg-[#666] text-white cursor-pointer"
+      >
+        Add Variable
+      </button>
     </>
   );
 }

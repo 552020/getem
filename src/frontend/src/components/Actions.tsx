@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface FunctionCallProps {
   receiver_id: string;
   method_name: string;
@@ -27,25 +25,22 @@ interface TransferParams {
 }
 
 interface Action {
-	scope: string;
-	params:
-	  | LimitParams
-	  | TransferParams
-	  | ApprovalsParams
-	  | ContextValueProps
-	  | FunctionCallProps;
-  }
+  scope: string;
+  params:
+    | LimitParams
+    | TransferParams
+    | ApprovalsParams
+    | ContextValueProps
+    | FunctionCallProps;
+}
 interface ActionsProps {
   actions: Action[];
 }
 
-
-interface TableHeaderProps {
-	columns: number;
-	bgColor?: boolean;
-  }
-
-
+// interface TableHeaderProps {
+//   columns: number;
+//   bgColor?: boolean;
+// }
 
 export default function Actions({ actions }: ActionsProps) {
   const getColumnCount = (scope: string) => {
@@ -164,20 +159,20 @@ export default function Actions({ actions }: ActionsProps) {
 
   return (
     <>
-      <div 
+      <div
         className={`grid gap-2 ${
-          actions[0] ? `grid-cols-${getColumnCount(actions[0].scope)}` : 'grid-cols-1'
+          actions[0]
+            ? `grid-cols-${getColumnCount(actions[0].scope)}`
+            : 'grid-cols-1'
         } ${actions[0] ? 'bg-orange-500' : 'bg-transparent'}`}
       >
         {actions[0] && renderActionContent(actions[0])}
       </div>
       <div>
         {actions.map((action, index) => (
-          <div 
+          <div
             key={index}
-            className={`grid gap-2 ${
-              `grid-cols-${getColumnCount(action.scope)}`
-            }`}
+            className={`grid gap-2 ${`grid-cols-${getColumnCount(action.scope)}`}`}
           >
             {renderActionValues(action)}
           </div>

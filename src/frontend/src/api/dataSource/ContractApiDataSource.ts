@@ -2,6 +2,7 @@ import { ApiResponse } from '@calimero-network/calimero-client';
 
 import {
   ApprovalsCount,
+  ContextDetails,
   ContextVariables,
   ContractApi,
   ContractProposal,
@@ -147,10 +148,59 @@ export class ContextApiDataSource implements ContractApi {
     }
   }
 
-  getContextMembers(): ApiResponse<Members[]> {
-    throw new Error('Method not implemented.');
+  async getContextMembers(): ApiResponse<Members[]> {
+    // TODO: Backend API endpoint not implemented yet
+    // Mock implementation returning empty array
+    console.warn('getContextMembers: Backend API endpoint not implemented yet');
+    return {
+      data: [],
+      error: null,
+    };
   }
-  getContextMembersCount(): ApiResponse<number> {
-    throw new Error('Method not implemented.');
+
+  async getContextMembersCount(): ApiResponse<number> {
+    // TODO: Backend API endpoint not implemented yet
+    // Mock implementation returning 0
+    console.warn(
+      'getContextMembersCount: Backend API endpoint not implemented yet',
+    );
+    return {
+      data: 0,
+      error: null,
+    };
+  }
+
+  async getContextDetails(contextId: string): ApiResponse<ContextDetails> {
+    // TODO: Backend API endpoint not implemented yet
+    // Mock implementation returning empty object
+    // console.log to shut up the warning
+    console.log('contextId', contextId);
+    console.warn('getContextDetails: Backend API endpoint not implemented yet');
+    return {
+      data: {} as ContextDetails,
+      error: null,
+    };
+  }
+
+  async deleteProposal(proposalId: string): ApiResponse<void> {
+    try {
+      const { jwtObject, error } = getConfigAndJwt();
+      if (error) {
+        return { error };
+      }
+
+      const apiEndpoint = `${getNodeUrlFromLocalStorage()}/admin-api/contexts/${jwtObject.context_id}/proposals/${proposalId}`;
+      await axios.delete(apiEndpoint);
+
+      return {
+        data: undefined,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        data: null,
+        error: error as Error,
+      };
+    }
   }
 }

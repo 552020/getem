@@ -1,5 +1,4 @@
 import React from 'react';
-import { FormGroup } from './CreateProposalPopup';
 
 interface ActionsDropdownProps {
   actionType: string;
@@ -42,14 +41,17 @@ export default function ActionsDropdown({
   handleInputChange,
 }: ActionsDropdownProps) {
   return (
-    <FormGroup>
-      <label htmlFor="actionType">Action Type</label>
+    <div className="mb-4">
+      <label htmlFor="actionType" className="block mb-2">
+        Action Type
+      </label>
       <select
         id="actionType"
         name="actionType"
         value={actionType}
         onChange={handleInputChange}
         required
+        className="w-full p-2 rounded bg-[#333] border border-[#444] text-white"
       >
         {actionTypes.map((action, i) => (
           <option key={i} value={action.label}>
@@ -57,6 +59,6 @@ export default function ActionsDropdown({
           </option>
         ))}
       </select>
-    </FormGroup>
+    </div>
   );
 }

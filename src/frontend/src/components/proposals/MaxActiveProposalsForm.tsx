@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormGroup, ProposalData } from './CreateProposalPopup';
+import { ProposalData } from './CreateProposalPopup';
 
 interface MaxActiveProposalsFormProps {
   proposalForm: ProposalData;
@@ -13,8 +13,10 @@ export default function MaxActiveProposalsForm({
   handleInputChange,
 }: MaxActiveProposalsFormProps) {
   return (
-    <FormGroup>
-      <label htmlFor="maxActiveProposals">Maximum Active Proposals</label>
+    <div className="mb-4">
+      <label htmlFor="maxActiveProposals" className="block mb-2">
+        Maximum Active Proposals
+      </label>
       <input
         type="number"
         id="maxActiveProposals"
@@ -24,7 +26,8 @@ export default function MaxActiveProposalsForm({
         onChange={handleInputChange}
         min="1"
         required
+        className="w-full p-2 rounded bg-[#333] border border-[#444] text-white"
       />
-    </FormGroup>
+    </div>
   );
 }
