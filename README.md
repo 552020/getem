@@ -1,12 +1,17 @@
+<img width="1325" alt="Screenshot 2025-02-09 at 23 16 05" src="https://github.com/user-attachments/assets/32937015-3bc5-447c-a7cb-6c86d19cad64" />
+
 # GETEM
 
 **GETEM is a privacy-focused embedding marketplace, powered by Calimero Network and ICP.**
+
+Check our [video presentation](https://www.loom.com/share/9887ddffd93948b1bcce4a15943af92e?sid=22ad4138-39b3-48bd-81ec-28692819fe82)! 
 
 ## Project Overview
 
 ### Problem Statement
 
-Increasing need for specialized and rare datasets that LLMs are not trained on to leverage specialized AI agents, while ensuring secure, decentralized data sharing to protect sensitive information.
+⬜ The problem we address is the increasing need for specialized datasets to enhance the capabilities of AI agents, while also ensuring secure, decentralized data sharing to protect sensitive information.
+
 
 ### Target Audience
 
@@ -22,7 +27,7 @@ The peer-to-peer data exchange ensures that embeddings flow securely between buy
 ### Feasibility
 
 - **Tech-Ready:** GETEM leverages existing technologies, without requring substantial R&D efforts.
-- **Key Challenges:** Streamlining the authentication process and improving developer experience (DX) on Calimero Network for fast iterations.
+- **Key Challenges:** Streamlining the authentication process, improving developer experience on Calimero Network, bringing AI into the nodes
 
 ### Impact & Novelty
 
@@ -42,38 +47,58 @@ GETEM operates on a **transaction-based revenue model**, earning fees through:
 - **Subscription Model:** Tiered access to premium embedding providers.
 - **Licensing & Enterprise Integrations:** AI enterprises pay for **customized embedding solutions**.
 
-### Roadmap
+### Team - SLD Unit
 
-**Phase 1 – Web2 Marketplace:** P2P embedding transactions with **wallet-based payments**.
-**Phase 2 – ICP Smart Contract Integration:** Automate embedding transactions using **ICP/Calimero proxy & context contract**.
-**Phase 3 – Decentralization of Marketplace:** Move **frontend & marketplace** fully to ICP.
-**Phase 4 – AI Agent Integration:** Enable **Federated RAG** with a special AI node, allowing private, context-aware AI execution.
-
-### Team
-
-- [Léonard Mangallon](https://github.com/lmangall)
-- [Stefano Lombardo](https://github.com/552020)
+- [Stefano](https://github.com/552020)
+- [Léonard](https://github.com/lmangall)
+- [Daniil](https://github.com/dantol29/)
 
 ## Pitch Deck
 
-- [Insert Link to the Pitch Deck]
-
-## Demo
-
-- [Insert Link to Demo]
-
-## Repository
-
-- [Insert link to the repository]
-
-## Archiecture
-
-- TODO: add diagrams to explain architecture
+- [The power of Getem](https://github.com/552020/getem/blob/main/Getem_pitch_deck.pdf)
 
 ## Installation & Setup X DEVS
 
 - **Prerequisites**
 
-To setup a dev environemnt for Calimero and ICP follow this tutorial: https://calimero-network.github.io/tutorials/awesome-projects/building-with-icp
+Use our **Makefile** to automate the setup process, with adapted and ad-hoc scripts, but it could not work on your machine! :-) For easy of use start make in a tmux session.
+You can also use the official docs to setup a dev environemnt for Calimero and ICP following this tutorial: https://calimero-network.github.io/tutorials/awesome-projects/building-with-icp
 
-We crated also our **Makefile** to automate the setup process, with adapted and ad-hoc scripts, but it could not work on your machine! :-) Reach out if you find any difficulties. For easy of use start make in a tmux session.
+
+## The current Getem and our vision for the future:
+
+**Phase 1 – Web2 Marketplace:** P2P embedding transactions with **wallet-based payments**.
+
+**Phase 2 – ICP Smart Contract Integration:** Automate embedding transactions using **ICP/Calimero proxy & context contract**.
+
+**Phase 3 – Decentralization of Marketplace:** Move **frontend & marketplace** fully to ICP.
+
+**Phase 4 – AI Agent Integration:** Enable **Federated RAG** with a special AI node, allowing private, context-aware AI execution.
+
+<img width="1336" alt="Screenshot 2025-02-09 at 23 41 09" src="https://github.com/user-attachments/assets/0118787b-0892-4fb2-838a-22fd2602beb8" />
+
+
+
+_________________________________________________________________________________________________________________________________
+
+
+
+<img width="1375" alt="Screenshot 2025-02-09 at 23 41 20" src="https://github.com/user-attachments/assets/0fa977a7-116d-4233-b485-0e3d81873db6" />
+
+
+_________________________________________________________________________________________________________________________________
+
+
+
+<img width="1371" alt="Screenshot 2025-02-09 at 23 41 30" src="https://github.com/user-attachments/assets/29f59373-bf54-4a1d-a8c2-9c734ba4145f" />
+
+
+
+
+
+
+<img width="1344" alt="Screenshot 2025-02-09 at 23 16 30" src="https://github.com/user-attachments/assets/204e346a-c4c0-45f4-a905-084925fd2f00" />
+
+
+
+
